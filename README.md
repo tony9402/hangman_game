@@ -14,4 +14,4 @@
 
 ### 게임 기본 틀
 
-![Hangman Game](./assets/frame.png)
+<img src="./assets/frame.png" height="202" width="320"></img>
