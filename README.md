@@ -15,3 +15,10 @@
 ### 게임 기본 틀
 
 <img src="./assets/frame.png" height="202" width="320"></img>
+
+### 게임 진행
+
+<img src="./assets/init.png" height="202" width="320"></img>  
+<img src="./assets/1.png" height="202" width="320"></img>  
+<img src="./assets/2.png" height="202" width="320"></img>  
+<img src="./assets/3.png" height="202" width="320"></img>
