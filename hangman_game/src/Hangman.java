@@ -37,7 +37,7 @@ public class Hangman {
             e.printStackTrace();
         }
         
-        // 미리 뽑아놓기 15단어 (최대 12단어이므로 그 이상으로 뽑아놓)
+        // 미리 뽑아놓기 15단어 (최대 12단어이므로 그 이상으로 뽑아놓음)
         while(problems.size() < 15) {
             int index = getRandomIndex();
             while (choose_word_idx.contains(index)) {
@@ -84,6 +84,7 @@ public class Hangman {
         return sb.toString();
     }
     
+    // GUI에 글자 업데이트
     public void show() {
         int index = choose_word_idx.get(problemIndex);
         currentSolution = words.get(index);
@@ -93,8 +94,8 @@ public class Hangman {
         frame.inputField.setText("");
     }
     
+    // 입력 받은 단어와 정답 비교
     public void update() {
-        // 입력받은 값 가지고 오기
         String userSolution = frame.inputField.getText();
         if(currentSolution.equals(userSolution)) {
             correctCount ++;
