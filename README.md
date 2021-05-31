@@ -25,11 +25,33 @@
 
 ### 게임 기본 틀
 
-<img src="./assets/frame.png" height="202" width="320"></img>
+<p align="center">
+  <img src="./assets/frame.png" height="202" width="320"></img>
+  <br>
+  기본 틀
+</p>
+
+
 
 ### 게임 진행
 
-<img src="./assets/init.png" height="202" width="320"></img>  
-<img src="./assets/1.png" height="202" width="320"></img>  
-<img src="./assets/2.png" height="202" width="320"></img>  
-<img src="./assets/3.png" height="202" width="320"></img>
+<p align="center">
+  <img src="./assets/init.png" height="202" width="320"></img>  
+  <br>
+  게임 실행 직후
+</p>
+<p align="center">
+  <img src="./assets/1.png" height="202" width="320"></img>  
+  <br>
+  맞췄을 경우
+</p>
+<p align="center">
+  <img src="./assets/2.png" height="202" width="320"></img>  
+  <br>
+  한번 틀렸을 경우
+</p>
+<p align="center">
+  <img src="./assets/3.png" height="202" width="320"></img>
+  <br>
+  한번 틀리고 다시 맞췄을 경우
+</p>
