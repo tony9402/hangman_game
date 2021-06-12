@@ -38,7 +38,14 @@ public class Hangman {
         }
         
         // 미리 뽑아놓기 15단어 (최대 12단어이므로 그 이상으로 뽑아놓음)
-        while(problems.size() < 15) {
+        gameInitialiation(15);
+        
+        frame.Initialization(this);
+        show();
+    }
+    
+    public void gameInitialiation(int wordCount) {
+        while(problems.size() < wordCount) {
             int index = getRandomIndex();
             while (choose_word_idx.contains(index)) {
                 index = getRandomIndex();
@@ -47,9 +54,6 @@ public class Hangman {
             String problem = getRandomWordMask(words.get(index)); 
             problems.add(problem);
         }
-        
-        frame.Initialization(this);
-        show();
     }
     
     public String preprocessing(String word) {
