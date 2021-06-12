@@ -3,7 +3,6 @@ import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
-import java.lang.*;
 import java.util.*;
 
 public class Hangman {
@@ -11,13 +10,13 @@ public class Hangman {
     ArrayList<String> problems = new ArrayList<>();
     ArrayList<Integer> choose_word_idx = new ArrayList<Integer>();
     String currentSolution;
-    int tryCount = 0;
-    int correctCount = 0;
-    int wrongCount = 0;
-    int problemIndex = 0;
-    static Frame frame = new Frame();
+    int tryCount = 0;      // 시도 횟수
+    int correctCount = 0;  // 성공 횟수
+    int wrongCount = 0;    // 실패 횟수
+    int problemIndex = 0;  // 현재 라운드
+    final int maxWordCount = 15;
+    static Frame frame = new Frame(); // GUI Initialization
     
-    public Hangman() { }
     public void load(String path) {
         try {
             File file = new File(path);
@@ -38,38 +37,53 @@ public class Hangman {
         }
         
         // 미리 뽑아놓기 15단어 (최대 12단어이므로 그 이상으로 뽑아놓음)
-        gameInitialization(15);
+        gameInitialization(maxWordCount);
         
         frame.Initialization(this);
         show();
     }
     
+    // words.txt에서 단어 wordCount
     public void gameInitialization(int wordCount) {
         while(problems.size() < wordCount) {
             int index = getRandomIndex();
+            // 이미 뽑은거면 다시 뽑기
             while (choose_word_idx.contains(index)) {
                 index = getRandomIndex();
             }
+
+            // 뽑은 정보 저장
             choose_word_idx.add(index);
+
+            // 단어에서 글자 숨기기
             String problem = getRandomWordMask(words.get(index)); 
+            
+            // 글자 숨긴 단어
             problems.add(problem);
         }
     }
 
+    // words.txt에 있는 단어 전처리
     public String preprocessing(String word) {
         StringBuilder sb = new StringBuilder();
         for(char ch : word.toCharArray()) {
+            // 알파벳이 아닌 건 제외 
+            //  -> 단어의 길이가 0으로 return 하면 다음 작업에서 제외
             if( !Character.isLetter(ch) ) return "";
+
+            // 알파벳이면 대문자로 변경
             sb.append(Character.toUpperCase(ch));
         }
         return sb.toString();
     }
     
+    // 전처리 후 정제된 데이터에서 랜덤으로 선택
     public int getRandomIndex() {
         int length = words.size();
         return (int)(Math.random() * length);
     }
     
+    // 랜덤으로 단어에서 몇글자 가림
     public String getRandomWordMask(String word) {
         StringBuilder sb = new StringBuilder(word);
         int length = word.length();
@@ -101,11 +115,13 @@ public class Hangman {
     // 입력 받은 단어와 정답 비교
     public void update() {
         String userSolution = frame.inputField.getText();
+        // 맞췄을 경우
         if(currentSolution.equals(userSolution)) {
             correctCount ++;
             tryCount = 0;
             problemIndex ++;
         }
+        // 틀렸을 경우
         else {
             tryCount ++;
             if(tryCount == 5) {
