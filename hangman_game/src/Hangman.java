@@ -38,55 +38,55 @@ public class Hangman {
         }
         
         // 미리 뽑아놓기 15단어 (최대 12단어이므로 그 이상으로 뽑아놓음)
-        gameInitialiation(15);
+        gameInitialization(15);
         
         frame.Initialization(this);
         show();
     }
     
-    public void gameInitialiation(int wordCount) {
-        while(problems.size() < wordCount) {
-            int index = getRandomIndex();
-            while (choose_word_idx.contains(index)) {
-                index = getRandomIndex();
-            }
-            choose_word_idx.add(index);
-            String problem = getRandomWordMask(words.get(index)); 
-            problems.add(problem);
-        }
-    }
+	public void gameInitialization(int wordCount) {
+	    while(problems.size() < wordCount) {
+	        int index = getRandomIndex();
+	        while (choose_word_idx.contains(index)) {
+	            index = getRandomIndex();
+	        }
+	        choose_word_idx.add(index);
+	        String problem = getRandomWordMask(words.get(index)); 
+	        problems.add(problem);
+	    }
+	}
     
-    public String preprocessing(String word) {
-        StringBuilder sb = new StringBuilder();
-        for(char ch : word.toCharArray()) {
-            if( !Character.isLetter(ch) ) return "";
-            sb.append(Character.toUpperCase(ch));
-        }
-        return sb.toString();
-    }
+	public String preprocessing(String word) {
+	    StringBuilder sb = new StringBuilder();
+	    for(char ch : word.toCharArray()) {
+	        if( !Character.isLetter(ch) ) return "";
+	        sb.append(Character.toUpperCase(ch));
+	    }
+	    return sb.toString();
+	}
     
     public int getRandomIndex() {
         int length = words.size();
         return (int)(Math.random() * length);
     }
     
-    public String getRandomWordMask(String word) {
-        StringBuilder sb = new StringBuilder(word);
-        int length = word.length();
-        double maxValue = length * 0.3;
-        double randomValue = Math.random() * maxValue;
-        int randomValueInt = (int)(randomValue + 1); 
-        
-        ArrayList<Integer> maskIndex = new ArrayList<>();
-        
-        while(maskIndex.size() < randomValueInt) {
-            int randomIndex = (int)(Math.random() * length);
-            if (maskIndex.contains(randomIndex)) continue;
-            maskIndex.add(randomIndex);
-            sb.replace(randomIndex, randomIndex + 1, "-");
-        }
-        return sb.toString();
-    }
+	public String getRandomWordMask(String word) {
+	    StringBuilder sb = new StringBuilder(word);
+	    int length = word.length();
+	    double maxValue = length * 0.3;
+	    double randomValue = Math.random() * maxValue;
+	    int randomValueInt = (int)(randomValue + 1); 
+	    
+	    ArrayList<Integer> maskIndex = new ArrayList<>();
+	    
+	    while(maskIndex.size() < randomValueInt) {
+	        int randomIndex = (int)(Math.random() * length);
+	        if (maskIndex.contains(randomIndex)) continue;
+	        maskIndex.add(randomIndex);
+	        sb.replace(randomIndex, randomIndex + 1, "-");
+	    }
+	    return sb.toString();
+	}
     
     // GUI에 글자 업데이트
     public void show() {
@@ -98,28 +98,28 @@ public class Hangman {
         frame.inputField.setText("");
     }
     
-    // 입력 받은 단어와 정답 비교
-    public void update() {
-        String userSolution = frame.inputField.getText();
-        if(currentSolution.equals(userSolution)) {
-            correctCount ++;
-            tryCount = 0;
-            problemIndex ++;
-        }
-        else {
-            tryCount ++;
-            if(tryCount == 5) {
-                wrongCount ++;
-                tryCount = 0;
-                problemIndex ++;
-            }
-        }
-        
-        if(wrongCount == 3 || correctCount == 10) {
-            close();
-        }
-        show();
-    }
+	// 입력 받은 단어와 정답 비교
+	public void update() {
+	    String userSolution = frame.inputField.getText();
+	    if(currentSolution.equals(userSolution)) {
+	        correctCount ++;
+	        tryCount = 0;
+	        problemIndex ++;
+	    }
+	    else {
+	        tryCount ++;
+	        if(tryCount == 5) {
+	            wrongCount ++;
+	            tryCount = 0;
+	            problemIndex ++;
+	        }
+	    }
+	    
+	    if(wrongCount == 3 || correctCount == 10) {
+	        close();
+	    }
+	    show();
+	}
     
     public void close() {
         System.exit(0);
